@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import NavBar from './NavBar'
 import { useParams } from 'react-router-dom'
 import { albumsData, assets, songsData } from '../assets/assets'
+import { PlayerContext } from '../context/PlayerContext'
 
 const DisplayAlbum = () => {
     const {id} = useParams()
     const albumData = albumsData[id]
+    const {playWithId } = useContext(PlayerContext)
    
   return (
       <>
@@ -34,7 +36,7 @@ const DisplayAlbum = () => {
         </div>
 <hr />
 {songsData.map((item, index) => (
-  <div className="flex flex-row justify-between gap-4 p-2 items-center md:w-[500px]">
+  <div key={index} onClick={()=>playWithId(item.id)} className="flex flex-row justify-between gap-4 p-2 items-center md:w-[500px] hover:bg-[#25251b]  cursor-pointer">
     {/* Song title and index */}
         <div className="text-white  flex gap-6">
             <b className=" text-[#a7a7a7]">{index + 1}
